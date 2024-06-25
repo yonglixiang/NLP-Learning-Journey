@@ -29,6 +29,11 @@ NLP-Learning-Journey/
 │   └── ...                      # Additional paper summaries
 │
 ├── exercises/
+│   ├── py_packages/
+│   │   ├── PyTorch/             # Code for pytorch learning
+│   │   ├── Sklearn/             # Code for sklearn learning
+│   │   └── ...                  # Additional python package exercises
+│   │
 │   ├── basic_text_processing/
 │   │   ├── tokenizer.py         # Code for tokenization
 │   │   ├── stemming.py          # Code for stemming
