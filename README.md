@@ -1,3 +1,4 @@
+```markdown
 # NLP-Learning-Journey
 
 Welcome to my NLP Learning Journey repository! This project is dedicated to documenting my studies in Natural Language Processing (NLP). It includes reading notes from influential papers and exercise code to better understand various NLP concepts and techniques.
@@ -20,6 +21,7 @@ This repository is a collection of notes and code exercises related to NLP. My a
 - To create a resource for others interested in learning NLP
 
 ## Structure
+```
 NLP-Learning-Journey/
 │
 ├── papers/
@@ -48,4 +50,7 @@ NLP-Learning-Journey/
 │   ├── dataset2/                 # Folder for Dataset 2
 │   └── ...                       # Additional datasets
 │
-└── README.md                     # Project overview and instructions
+├── requirements.md               # Project dev requirements(include python packages' names)
+│
+└── README.md                     # Project overview and instructions 
+```
