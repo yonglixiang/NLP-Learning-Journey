@@ -42,7 +42,7 @@ NLP-Learning-Journey/
 │   ├── machine_learning_models/
 │   │   ├── sentiment_analysis.py # Code for sentiment analysis
 │   │   ├── spam_detection.py     # Code for spam detection
-│   │   └── ...                   # Additional ML model exercises
+│   │   └── ngram_model           # Code for ngram model
 │   │
 │   └── deep_learning_models/
 │       ├── word_embeddings.py    # Code for word embeddings
