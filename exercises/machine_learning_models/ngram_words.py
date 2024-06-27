@@ -14,7 +14,7 @@ def read_file(filename: str, max_line_count: int) -> list:
     
     return content
 
-def data_normalization(content: list, n: int) -> list:
+def data_normalization(content: list) -> list:
     normalized_content = []
     for sentence in content:
         words = sentence.split(' ')
@@ -24,7 +24,6 @@ def data_normalization(content: list, n: int) -> list:
         # 1. Remove '-LRB-' and '-RRB-'
         # 2. Remove unascii word
         # 3. Remove punctuation
-        # 4. Convert to lowercase
         for word in words:
             if word == '-LRB-' or word == '-RRB-':
                 word = ''
@@ -32,19 +31,20 @@ def data_normalization(content: list, n: int) -> list:
                 word = ''
             elif not word.isascii():
                 word = ''
-            else:
-                word = word.lower()
+            
             if word != '':
-                normalized_words.append(word)
-        
-        # Add n-1 begin and 1 end token for each sentence
-        for i in range(n-1):
-            normalized_words.insert(0, 'START')
-        normalized_words.append('END')
-        
+                normalized_words.append(word)        
         normalized_sentence = ' '.join(normalized_words)
         normalized_content.append(normalized_sentence)
     return normalized_content
+
+def add_token(content: list[str], starts: int, ends: int) -> list[str]:
+    tokenized_content = []
+    
+    for sentence in content:
+        tokenized_content.append('START ' * starts + sentence + ' END' * ends)
+    
+    return tokenized_content
 
 def n_gram_words(content: list, n: int) -> dict:
     vocab = {}
@@ -66,18 +66,20 @@ def write_ngram_to_file(vocab: dict, filename: str) -> None:
 
 def data_prepare_for_ngram(data_filename: str, vocab_filename: str, n: int, type: str = 'markov') -> dict:
     content = read_file(data_filename, 10000)
-    content = data_normalization(content, n)
     vocabs = {}
+    content = data_normalization(content)
     
     if type.lower() == 'markov':
         # Generate ngram and n-1 gram vocab
+        content = add_token(content, n-1, 1)
         for i in range(n-1, n+1):
             vocab = n_gram_words(content, i)
             write_ngram_to_file(vocab, vocab_filename)
             vocabs.update(vocab)
     elif type.lower() == 'chainrule':
         # Generate 1, 2, ..., n+1 gram vocab, include start and end token
-        for i in range(1, n+2):
+        content = add_token(content, 1, 1)
+        for i in range(1, n+1):
             vocab = n_gram_words(content, i)
             write_ngram_to_file(vocab, vocab_filename)
             vocabs.update(vocab)
