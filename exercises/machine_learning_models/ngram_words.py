@@ -64,7 +64,7 @@ def write_ngram_to_file(vocab: dict, filename: str) -> None:
             value = str(value)
             file.write('\t'.join([value, key]) + '\n')
 
-def data_prepare_for_ngram(data_filename: str, vocab_filename: str, n: int, type: str = 'markov') -> dict:
+def data_prepare_for_ngram(data_filename: str, vocab_filename: str, n: int, type: str = 'markov') -> None:
     content = read_file(data_filename, 10000)
     vocabs = {}
     content = data_normalization(content)
@@ -84,4 +84,4 @@ def data_prepare_for_ngram(data_filename: str, vocab_filename: str, n: int, type
             write_ngram_to_file(vocab, vocab_filename)
             vocabs.update(vocab)
     
-    return vocabs
+    return None
